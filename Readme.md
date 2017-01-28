@@ -1,4 +1,4 @@
-# gRcon
+# George gRcon
 
 Is a simple javaFX implementation of RCON protocol. It could be used to communicate with Minecraft server (or other game servers).
 
