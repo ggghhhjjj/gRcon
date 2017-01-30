@@ -31,36 +31,54 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import net.kronos.rkon.core.Rcon;
 import net.kronos.rkon.core.ex.AuthenticationException;
 
-public class FXMLController implements Initializable {
+/**
+ * FXML Controller class
+ *
+ * @author George Shumakov <george.shumakov@gmail.com>
+ */
+public class RconSceneController implements Initializable {
 
     @FXML
-    private TextArea textArea;
-    @FXML
-    private TextField actionField;
-    @FXML
-    private TextField hostField;
-    @FXML
-    private TextField portField;
-    @FXML
-    private TextField passwdField;
+    private TextField hostTextField;
 
     @FXML
-    public void onEnter(ActionEvent ae) throws IOException, AuthenticationException {
-        String host = hostField.getText();
-        int port = Integer.valueOf(portField.getText());
-        String pass = passwdField.getText();
-        Rcon rcon = new Rcon(host, port, pass.getBytes());
-        String result = rcon.command(actionField.getText());
-        textArea.setText(result);
-    }
+    private TextField portTextField;
 
+    @FXML
+    private PasswordField passPasswordField;
+
+    @FXML
+    private TextField commandsTextField;
+
+    @FXML
+    private TextArea responseTextArea;
+    
+    /**
+     * Initializes the controller class.
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        portField.setText("25575");
+        portTextField.setText("25575");
+
     }
+    
+       @FXML
+    public void onEnter(ActionEvent ae) throws IOException, AuthenticationException {
+        String host = hostTextField.getText();
+        int port = Integer.valueOf(portTextField.getText());
+        String pass = passPasswordField.getText();
+        Rcon rcon = new Rcon(host, port, pass.getBytes());
+        String result = rcon.command(commandsTextField.getText());
+        responseTextArea.setText(result);
+    }
+
 }
